@@ -6,7 +6,7 @@ import { works } from '@/data/works'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-transparent pt-20">
       <Header />
       <AboutSection />
       <WorksGrid works={works} />

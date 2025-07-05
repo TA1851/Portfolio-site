@@ -31,17 +31,17 @@ const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
             Tatuhiko Osaka&apos;s Portfolio
           </span>
         </h1>
-        <p className='text-center mb-32'>
+        <p className='text-center mb-32 text-white'>
           Welcome to my portfolio-site!
           </p>
       </div>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+        <h2 className="text-3xl font-bold text-center mb-8 text-white">
           {about?.title || 'ABOUT'}
         </h2>
         <div className="about-content flex flex-col items-center max-w-4xl mx-auto">
           <div className="about-text w-full mb-8">
-            <p className="mb-4 text-gray-700 dark:text-gray-300 about-profile-text text-lg leading-relaxed">
+            <p className="mb-4 text-white about-profile-text text-lg leading-relaxed">
               {content}
             </p>
           </div>
@@ -50,7 +50,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
           </div>
         </div>
         <div className="skills mt-12">
-          <h3 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+          <h3 className="text-2xl font-bold text-center mb-6 text-white">
             スキル
           </h3>
           <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">

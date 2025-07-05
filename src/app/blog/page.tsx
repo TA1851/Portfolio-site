@@ -20,7 +20,7 @@ export default async function BlogPage() {
   const posts = await getPosts()
 
   return (
-    <div className="min-h-screen bg-transparent flex flex-col">
+    <div className="min-h-screen bg-transparent flex flex-col pt-20">
       <Header />
       <main className="container mx-auto px-4 py-8 flex-grow">
         <h1 className="text-4xl font-bold text-white mb-8">

@@ -31,7 +31,7 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-transparent flex flex-col">
+    <div className="min-h-screen bg-transparent flex flex-col pt-20">
       <Header />
       <main className="container mx-auto px-4 py-8 flex-grow">
         <article className="max-w-4xl mx-auto">

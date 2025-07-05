@@ -23,7 +23,7 @@ export default async function AboutPage() {
     console.log('About data from Sanity:', about);
 
     return (
-      <div className="min-h-screen bg-transparent">
+      <div className="min-h-screen bg-transparent pt-20">
         <Header />
         <main className="pt-20">
           <div className="container mx-auto px-4 py-8">

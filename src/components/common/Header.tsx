@@ -16,7 +16,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="bg-white dark:bg-gray-900 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -59,7 +59,7 @@ export default function Header() {
       {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm">
             {navigation.map((item) => (
               <Link
                 key={item.name}
