@@ -23,7 +23,7 @@ export default async function AboutPage() {
     console.log('About data from Sanity:', about);
 
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="min-h-screen bg-transparent">
         <Header />
         <main className="pt-20">
           <div className="container mx-auto px-4 py-8">
@@ -36,7 +36,7 @@ export default async function AboutPage() {
   } catch (error) {
     console.error('Error fetching about data:', error)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+      <div className="min-h-screen flex items-center justify-center bg-transparent">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-red-600 dark:text-red-400 mb-4">Error</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">

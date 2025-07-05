@@ -22,7 +22,7 @@ export const works: Work[] = [
   },
   {
     id: '3',
-    title: 'AIチャットボット',
+    title: '家計簿アプリを開発中',
     description: 'SpringBootを使用した家計簿アプリ',
     image: '/images/portfolio-site.jpg',
     technologies: ['Java', 'SpringWebFlux', 'Next.js', 'Emotion', 'MUI'],

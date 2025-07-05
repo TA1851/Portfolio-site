@@ -21,7 +21,7 @@ interface WorksGridProps {
 
 const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, className = '' }) => {
   return (
-    <section className={`works-section py-16 bg-gray-50 dark:bg-gray-800 ${className}`}>
+    <section className={`works-section py-16 bg-transparent ${className}`}>
       <div className="container mx-auto px-4">
         {showTitle && (
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
@@ -32,7 +32,7 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, classNam
           {works.map((work) => (
             <div
               key={work.id}
-              className="bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+              className="work-card overflow-hidden"
             >
               <Image
                 src={work.image}
@@ -42,14 +42,14 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, classNam
                 className="w-full h-48 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-xl font-semibold text-white mb-2">
                   {work.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                <p className="text-gray-200 mb-4">
                   {work.description}
                 </p>
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium mb-2 text-gray-900 dark:text-white">使用技術</h4>
+                  <h4 className="text-sm font-medium mb-2 text-white">使用技術</h4>
                   <div className="flex flex-wrap gap-2">
                     {work.technologies.map((tech) => (
                       <span

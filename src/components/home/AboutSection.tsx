@@ -31,7 +31,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
             Tatuhiko Osaka&apos;s Portfolio
           </span>
         </h1>
-        <p className='text-center mb-8'>Welcome to my portfolio-site!</p>
+        <p className='text-center mb-32'>
+          Welcome to my portfolio-site!
+          </p>
       </div>
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
