@@ -29,14 +29,14 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                className="relative text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-blue-500 dark:after:bg-green-500 after:transition-all after:duration-300 after:transform after:-translate-x-1/2 hover:after:w-full"
               >
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-end space-x-4 lg:w-0 lg:flex-1 ml-4">
             <ThemeToggle />
             <div className="md:hidden">
               <button
