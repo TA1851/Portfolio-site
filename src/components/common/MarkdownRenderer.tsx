@@ -75,9 +75,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           )
         },
         pre: ({ children }) => (
-          <pre className="bg-gray-900 border border-gray-700 p-4 rounded-lg overflow-x-auto my-4 text-sm leading-relaxed">
-            {children}
-          </pre>
+          <div className="relative my-4">
+            <div className="bg-gray-100 border border-gray-300 rounded-t px-4 py-2 text-sm font-mono text-gray-700">
+              <span>typescript</span>
+            </div>
+            <pre className="bg-gray-900 border border-gray-700 rounded-b-lg overflow-x-auto p-4 text-sm leading-relaxed">
+              {children}
+            </pre>
+          </div>
         ),
         
         // リンク
