@@ -24,6 +24,7 @@ export interface Post {
   author?: Author
   publishedAt: string
   body?: PortableTextBlock[]
+  markdown?: string // Markdownコンテンツ用のフィールド
   seo?: SEO
   _createdAt: string
   _updatedAt: string

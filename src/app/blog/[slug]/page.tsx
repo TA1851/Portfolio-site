@@ -4,6 +4,7 @@ import { Post } from '@/types'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import { PortableText } from '@portabletext/react'
+import MarkdownRenderer from '@/components/common/MarkdownRenderer'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity'
@@ -101,13 +102,52 @@ export default async function PostPage({ params }: PostPageProps) {
           </header>
           
           <div className="prose prose-lg prose-invert max-w-none text-white">
-            {post.body && (
+            {/* Markdownコンテンツがある場合はMarkdownを表示 */}
+            {post.markdown && (
+              <MarkdownRenderer content={post.markdown} />
+            )}
+            
+            {/* PortableTextコンテンツがある場合はPortableTextを表示 */}
+            {post.body && !post.markdown && (
               <PortableText 
                 value={post.body}
                 components={{
                   block: {
                     normal: ({ children }) => (
                       <p className="text-white mb-4 leading-relaxed">{children}</p>
+                    ),
+                    h1: ({ children }) => (
+                      <h1 className="text-white text-4xl font-bold mb-6 mt-8">{children}</h1>
+                    ),
+                    h2: ({ children }) => (
+                      <h2 className="text-white text-3xl font-semibold mb-5 mt-7">{children}</h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className="text-white text-2xl font-semibold mb-4 mt-6">{children}</h3>
+                    ),
+                    h4: ({ children }) => (
+                      <h4 className="text-white text-xl font-semibold mb-3 mt-5">{children}</h4>
+                    ),
+                    blockquote: ({ children }) => (
+                      <blockquote className="border-l-4 border-blue-400 pl-4 py-2 my-4 bg-gray-800/30 rounded-r">
+                        <div className="text-gray-300 italic">{children}</div>
+                      </blockquote>
+                    ),
+                  },
+                  list: {
+                    bullet: ({ children }) => (
+                      <ul className="text-white list-disc list-inside mb-4 space-y-2">{children}</ul>
+                    ),
+                    number: ({ children }) => (
+                      <ol className="text-white list-decimal list-inside mb-4 space-y-2">{children}</ol>
+                    ),
+                  },
+                  listItem: {
+                    bullet: ({ children }) => (
+                      <li className="text-white">{children}</li>
+                    ),
+                    number: ({ children }) => (
+                      <li className="text-white">{children}</li>
                     ),
                   },
                   marks: {
@@ -121,9 +161,66 @@ export default async function PostPage({ params }: PostPageProps) {
                         {children}
                       </a>
                     ),
+                    strong: ({ children }) => (
+                      <strong className="font-bold text-white">{children}</strong>
+                    ),
+                    em: ({ children }) => (
+                      <em className="italic text-white">{children}</em>
+                    ),
+                    code: ({ children }) => (
+                      <code className="bg-gray-800 text-green-400 px-2 py-1 rounded text-sm font-mono">
+                        {children}
+                      </code>
+                    ),
+                  },
+                  types: {
+                    code: ({ value }) => (
+                      <pre className="bg-gray-900 p-4 rounded-lg overflow-x-auto my-4">
+                        <code className="text-green-400 font-mono text-sm whitespace-pre">
+                          {value.code}
+                        </code>
+                      </pre>
+                    ),
+                    image: ({ value }) => {
+                      if (!value?.asset) return null;
+                      
+                      try {
+                        const imageUrl = urlFor(value)
+                          .width(800)
+                          .fit('max')
+                          .url();
+                        
+                        return (
+                          <div className="my-6">
+                            <Image
+                              src={imageUrl}
+                              alt={value.alt || '画像'}
+                              width={800}
+                              height={400}
+                              className="rounded-lg"
+                            />
+                            {value.caption && (
+                              <p className="text-gray-400 text-sm text-center mt-2 italic">
+                                {value.caption}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      } catch (error) {
+                        console.error('Error building image URL:', error);
+                        return null;
+                      }
+                    },
                   },
                 }}
               />
+            )}
+            
+            {/* コンテンツがない場合のメッセージ */}
+            {!post.body && !post.markdown && (
+              <p className="text-gray-400 italic">
+                コンテンツがありません。
+              </p>
             )}
           </div>
         </article>
