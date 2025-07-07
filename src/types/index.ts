@@ -5,6 +5,13 @@ export interface Post {
     current: string
   }
   excerpt?: string
+  image?: {
+    asset: {
+      _ref: string
+      url: string
+    }
+    alt?: string
+  }
   mainImage?: {
     asset: {
       _ref: string
@@ -16,10 +23,31 @@ export interface Post {
   tags?: Tag[]
   author?: Author
   publishedAt: string
-  body?: unknown
+  body?: PortableTextBlock[]
   seo?: SEO
   _createdAt: string
   _updatedAt: string
+}
+
+export interface PortableTextBlock {
+  _type: string
+  _key: string
+  style?: string
+  markDefs?: PortableTextMarkDef[]
+  children?: PortableTextSpan[]
+}
+
+export interface PortableTextSpan {
+  _type: string
+  _key: string
+  text: string
+  marks?: string[]
+}
+
+export interface PortableTextMarkDef {
+  _type: string
+  _key: string
+  href?: string
 }
 
 export interface Author {
@@ -120,29 +148,6 @@ export interface About {
       url: string
     }
   }
-}
-
-export interface PortableTextBlock {
-  _type: string
-  _key: string
-  children?: PortableTextSpan[]
-  markDefs?: PortableTextMarkDef[]
-  style?: string
-  level?: number
-  listItem?: string
-}
-
-export interface PortableTextSpan {
-  _type: string
-  _key: string
-  text: string
-  marks?: string[]
-}
-
-export interface PortableTextMarkDef {
-  _type: string
-  _key: string
-  href?: string
 }
 
 export interface SocialLink {

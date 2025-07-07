@@ -35,6 +35,10 @@ export const postsQuery = groq`
     title,
     slug,
     excerpt,
+    image {
+      asset->,
+      alt
+    },
     mainImage {
       asset->,
       alt
@@ -68,6 +72,10 @@ export const postQuery = groq`
     title,
     slug,
     excerpt,
+    image {
+      asset->,
+      alt
+    },
     mainImage {
       asset->,
       alt

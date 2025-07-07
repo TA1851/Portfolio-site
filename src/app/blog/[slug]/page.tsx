@@ -3,9 +3,10 @@ import { postQuery } from '@/lib/queries'
 import { Post } from '@/types'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
-// import { PortableText, PortableTextBlock } from '@portabletext/react'
+import { PortableText } from '@portabletext/react'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import { urlFor } from '@/lib/sanity'
 
 // キャッシュを無効化して常に最新データを取得
 export const dynamic = 'force-dynamic'
@@ -67,23 +68,63 @@ export default async function PostPage({ params }: PostPageProps) {
               )}
             </div>
             
-            {post.mainImage && (
+            {(post.image || post.mainImage) && (
               <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-8">
-                <Image 
-                  src={`https://cdn.sanity.io/images/hrnqyow5/production/${post.mainImage.asset._ref
-                    .replace('image-', '')
-                    .replace(/-(png|jpg|jpeg|webp|gif)$/, '.$1')}`}
-                  alt={post.mainImage.alt || post.title}
-                  width={800}
-                  height={450}
-                  className="w-full h-full object-cover"
-                />
+                {(() => {
+                  const imageData = post.image || post.mainImage;
+                  
+                  if (!imageData?.asset) return null;
+                  
+                  try {
+                    const imageUrl = urlFor(imageData)
+                      .width(800)
+                      .height(450)
+                      .fit('crop')
+                      .url();
+                    
+                    return (
+                      <Image 
+                        src={imageUrl}
+                        alt={imageData?.alt || post.title}
+                        width={800}
+                        height={450}
+                        className="w-full h-full object-cover"
+                      />
+                    );
+                  } catch (error) {
+                    console.error('Error building image URL:', error);
+                    return null;
+                  }
+                })()}
               </div>
             )}
           </header>
           
           <div className="prose prose-lg prose-invert max-w-none text-white">
-            {/* {post.body && <PortableText value={post.body as PortableTextBlock[]} />} */}
+            {post.body && (
+              <PortableText 
+                value={post.body}
+                components={{
+                  block: {
+                    normal: ({ children }) => (
+                      <p className="text-white mb-4 leading-relaxed">{children}</p>
+                    ),
+                  },
+                  marks: {
+                    link: ({ children, value }) => (
+                      <a 
+                        href={value.href} 
+                        className="text-blue-400 hover:text-blue-300 underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {children}
+                      </a>
+                    ),
+                  },
+                }}
+              />
+            )}
           </div>
         </article>
       </main>

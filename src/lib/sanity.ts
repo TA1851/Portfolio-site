@@ -5,9 +5,15 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  apiVersion: '2023-05-03',
+  apiVersion: '2024-12-01', // 最新のAPIバージョンに更新
   useCdn: false, // CDNを無効化して最新データを取得
   perspective: 'published', // 公開されたコンテンツのみを取得
+  token: process.env.SANITY_API_TOKEN, // 認証トークンを使用（環境変数に設定）
+  ignoreBrowserTokenWarning: true, // ブラウザでのトークン警告を無視
+  stega: {
+    enabled: false,
+    studioUrl: '/studio',
+  },
 })
 
 const builder = imageUrlBuilder(client)

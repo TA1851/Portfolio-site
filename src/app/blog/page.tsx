@@ -5,6 +5,7 @@ import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import { urlFor } from '@/lib/sanity'
 
 // キャッシュを無効化して常に最新データを取得
 export const dynamic = 'force-dynamic'
@@ -43,15 +44,34 @@ export default async function BlogPage() {
             {posts.map((post) => (
               <Link key={post._id} href={`/blog/${post.slug.current}`}>
                 <article className="work-card overflow-hidden hover:shadow-lg transition-shadow">
-                  {post.mainImage && (
+                  {(post.image || post.mainImage) && (
                     <div className="aspect-video bg-gray-200 dark:bg-gray-700">
-                      <Image 
-                        src={`https://cdn.sanity.io/images/hrnqyow5/production/${post.mainImage.asset._ref.replace('image-', '').replace('-png', '.png').replace('-jpg', '.jpg').replace('-jpeg', '.jpeg')}`}
-                        alt={post.mainImage.alt || post.title}
-                        width={400}
-                        height={225}
-                        className="w-full h-full object-cover"
-                      />
+                      {(() => {
+                        const imageData = post.image || post.mainImage;
+                        
+                        if (!imageData?.asset) return null;
+                        
+                        try {
+                          const imageUrl = urlFor(imageData)
+                            .width(400)
+                            .height(225)
+                            .fit('crop')
+                            .url();
+                          
+                          return (
+                            <Image 
+                              src={imageUrl}
+                              alt={imageData?.alt || post.title}
+                              width={400}
+                              height={225}
+                              className="w-full h-full object-cover"
+                            />
+                          );
+                        } catch (error) {
+                          console.error('Error building image URL:', error);
+                          return null;
+                        }
+                      })()}
                     </div>
                   )}
                   
