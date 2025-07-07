@@ -12,11 +12,6 @@ export default function ThemeToggle() {
     setMounted(true)
   }, [])
 
-  // デバッグログ
-  useEffect(() => {
-    console.log('Theme:', theme, 'Resolved:', resolvedTheme)
-  }, [theme, resolvedTheme])
-
   if (!mounted) {
     return (
       <div className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 animate-pulse">
@@ -26,30 +21,22 @@ export default function ThemeToggle() {
   }
 
   const toggleTheme = () => {
-    console.log('Current theme before toggle:', theme)
-    console.log('Current resolvedTheme:', resolvedTheme)
-    
     switch (theme) {
       case 'light':
-        console.log('Switching to dark')
         setTheme('dark')
         break
       case 'dark':
-        console.log('Switching to light')
         setTheme('light')
         break
       case 'system':
         // システムテーマの場合は、現在の解決済みテーマに基づいて切り替え
         if (resolvedTheme === 'dark') {
-          console.log('Switching from system (dark) to light')
           setTheme('light')
         } else {
-          console.log('Switching from system (light) to dark')
           setTheme('dark')
         }
         break
       default:
-        console.log('Setting to light as default')
         setTheme('light')
         break
     }
@@ -57,7 +44,6 @@ export default function ThemeToggle() {
 
   const getIcon = () => {
     const currentTheme = resolvedTheme || 'light'
-    console.log('Displaying icon for theme:', currentTheme)
     
     switch (currentTheme) {
       case 'dark':
@@ -84,7 +70,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      className="p-2 rounded-lg bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-white"
       aria-label={getTooltip()}
       title={getTooltip()}
     >

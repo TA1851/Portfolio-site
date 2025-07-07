@@ -1,31 +1,48 @@
-import { Work } from '@/components/common/WorksGrid';
+import { Work } from '@/types';
 
 export const works: Work[] = [
   {
-    id: '1',
+    _id: '1',
     title: 'ポートフォリオサイト',
     description: 'Next.jsとSanity CMSを使用したレスポンシブなポートフォリオサイト',
-    image: '/images/portfolio-site.jpg',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS'],
-    githubUrl: 'https://github.com/username/portfolio',
-    demoUrl: 'https://example.com'
+    image: {
+      asset: {
+        _ref: 'image-portfolio',
+        url: '/images/portfolio.png'
+      },
+      alt: 'ポートフォリオサイトのスクリーンショット'
+    },
+    technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Sanity CMS'],
+    githubUrl: 'https://github.com/TA1851/Portfolio-site',
   },
   {
-    id: '2',
+    _id: '2',
     title: 'ブログサイト構築',
     description: 'Next.jsとFastAPIを使用したブログサイトの構築',
-    image: '/images/portfolio-site.jpg',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'Render', 'Vercel'],
+    image: {
+      asset: {
+        _ref: 'image-fastapi',
+        url: '/images/fastapi.png'
+      },
+      alt: 'ブログサイトのスクリーンショット'
+    },
+    technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Python', 'FastAPI', 'MUI', 'Render', 'Vercel'],
     githubUrl: 'https://github.com/TA1851/blog-api-main',
     githubUrl2: 'https://github.com/TA1851/nextjs-app',
     demoUrl: 'https://nextjs-app-yvfr.vercel.app/'
   },
   {
-    id: '3',
-    title: 'AIチャットボット',
+    _id: '3',
+    title: '家計簿アプリを開発中',
     description: 'SpringBootを使用した家計簿アプリ',
-    image: '/images/portfolio-site.jpg',
-    technologies: ['Java', 'SpringWebFlux', 'Next.js', 'Emotion', 'MUI'],
+    image: {
+      asset: {
+        _ref: 'image-portfolio-site',
+        url: '/images/portfolio-site.jpg'
+      },
+      alt: '家計簿アプリのスクリーンショット'
+    },
+    technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS'],
     githubUrl: 'https://github.com/TA1851/ai-chatbot',
   },
 ];

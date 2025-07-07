@@ -4,6 +4,7 @@ import { Post } from '@/types'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import Link from 'next/link'
+import Image from 'next/image'
 
 async function getPosts(): Promise<Post[]> {
   try {
@@ -19,50 +20,52 @@ export default async function BlogPage() {
   const posts = await getPosts()
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-transparent flex flex-col pt-20">
       <Header />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
+      <main className="container mx-auto px-4 py-8 flex-grow">
+        <h1 className="text-4xl font-bold text-white mb-8">
           ブログ
         </h1>
         
         {posts.length === 0 ? (
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
+          <p className="text-gray-200 text-lg">
             まだ記事がありません。
           </p>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <Link key={post._id} href={`/blog/${post.slug.current}`}>
-                <article className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <article className="work-card overflow-hidden hover:shadow-lg transition-shadow">
                   {post.mainImage && (
                     <div className="aspect-video bg-gray-200 dark:bg-gray-700">
-                      <img 
+                      <Image 
                         src={`https://cdn.sanity.io/images/hrnqyow5/production/${post.mainImage.asset._ref.replace('image-', '').replace('-png', '.png').replace('-jpg', '.jpg').replace('-jpeg', '.jpeg')}`}
                         alt={post.mainImage.alt || post.title}
+                        width={400}
+                        height={225}
                         className="w-full h-full object-cover"
                       />
                     </div>
                   )}
                   
                   <div className="p-6">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    <h2 className="text-xl font-semibold text-white mb-2">
                       {post.title}
                     </h2>
                     
                     {post.excerpt && (
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      <p className="text-gray-200 mb-4">
                         {post.excerpt}
                       </p>
                     )}
                     
-                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center justify-between text-sm text-gray-300">
                       <span>
                         {new Date(post.publishedAt).toLocaleDateString('ja-JP')}
                       </span>
                       
                       {post.categories && post.categories.length > 0 && (
-                        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
+                        <span className="bg-blue-100/20 text-blue-200 px-2 py-1 rounded">
                           {post.categories[0].title}
                         </span>
                       )}

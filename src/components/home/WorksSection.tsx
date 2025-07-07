@@ -2,16 +2,18 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Work } from '@/types';
+import { getSkillColor } from '@/utils/skillColors';
 
 interface WorksSectionProps {
   works: Work[];
 }
 
 const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
+
   return (
     <section className="works-section py-16 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+        <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
           Works
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -42,7 +44,7 @@ const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
                     {work.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm"
+                        className={getSkillColor(tech)}
                       >
                         {tech}
                       </span>
