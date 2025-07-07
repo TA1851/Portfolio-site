@@ -1,3 +1,4 @@
+import { useState, useRef, FC, HTMLAttributes, DetailedHTMLProps } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -5,6 +6,39 @@ import 'highlight.js/styles/github-dark.css'
 
 interface MarkdownRendererProps {
   content: string
+}
+
+const CodeBlock: FC<DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>> = ({ children, ...props }) => {
+  const [isCopied, setIsCopied] = useState(false)
+  const preRef = useRef<HTMLPreElement>(null)
+
+  const handleCopy = () => {
+    if (preRef.current) {
+      const codeElement = preRef.current.querySelector('code')
+      if (codeElement) {
+        navigator.clipboard.writeText(codeElement.innerText)
+        setIsCopied(true)
+        setTimeout(() => setIsCopied(false), 2000)
+      }
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const language = (children as any)?.props?.className?.replace(/language-/, '') || 'code'
+
+  return (
+    <div className="relative my-4">
+      <div className="bg-gray-700 text-gray-300 border border-gray-600 rounded-t px-4 py-2 text-sm font-mono flex justify-between items-center">
+        <span>{language}</span>
+        <button onClick={handleCopy} className="text-sm font-sans bg-gray-600 hover:bg-gray-500 text-white px-2 py-1 rounded">
+          {isCopied ? 'Copied!' : 'Copy'}
+        </button>
+      </div>
+      <pre {...props} ref={preRef} className="bg-gray-800 border border-gray-600 rounded-b-lg overflow-x-auto p-4 text-sm leading-relaxed m-0">
+        {children}
+      </pre>
+    </div>
+  )
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
@@ -74,16 +108,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             </code>
           )
         },
-        pre: ({ children }) => (
-          <div className="relative my-4">
-            <div className="bg-gray-100 border border-gray-300 rounded-t px-4 py-2 text-sm font-mono text-gray-700">
-              <span>typescript</span>
-            </div>
-            <pre className="bg-gray-900 border border-gray-700 rounded-b-lg overflow-x-auto p-4 text-sm leading-relaxed">
-              {children}
-            </pre>
-          </div>
-        ),
+        pre: CodeBlock,
         
         // リンク
         a: ({ href, children }) => (

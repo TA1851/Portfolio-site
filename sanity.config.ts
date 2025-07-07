@@ -2,6 +2,7 @@ import { defineConfig, defineField } from 'sanity'
 import {deskTool} from 'sanity/desk'
 import {visionTool} from '@sanity/vision'
 import {colorInput} from '@sanity/color-input'
+import { codeInput } from '@sanity/code-input'
 import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
@@ -36,7 +37,8 @@ export default defineConfig({
           ])
     }),
     visionTool(),
-    colorInput()
+    colorInput(),
+    codeInput()
   ],
   schema: {
     types: schemaTypes,
