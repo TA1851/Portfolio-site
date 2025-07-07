@@ -1,6 +1,7 @@
 import React from 'react';
 import { About } from '@/types';
 import { aboutData } from '../../data/about';
+import { getSkillColor } from '@/utils/skillColors';
 
 interface AboutSectionProps {
   about?: About;
@@ -10,27 +11,6 @@ const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
   const skills = aboutData.skills;
   const content = aboutData.content?.[0]?.children?.[0]?.text;
   const paragraphs = content ? content.split('\n') : [];
-  
-  // スキルのカテゴリ別色設定
-  const getSkillColor = (skill: string) => {
-    // プログラミング言語
-    const languages = ['TypeScript', 'Python', 'Java', 'JavaScript'];
-    // フレームワーク・ライブラリ
-    const frameworks = ['React', 'FastAPI', 'SpringBoot', 'Next.js'];
-    // CSS関連
-    const styling = ['Tailwind CSS', 'Emotion', 'CSS', 'SCSS'];
-    
-    if (languages.includes(skill)) {
-      return 'px-4 py-2 bg-green-500 dark:bg-green-500 text-black dark:text-black rounded-full text-sm font-medium';
-    } else if (frameworks.includes(skill)) {
-      return 'px-4 py-2 bg-yellow-400 dark:bg-yellow-400 text-black dark:text-black rounded-full text-sm font-medium';
-    } else if (styling.includes(skill)) {
-      return 'px-4 py-2 bg-blue-400 dark:bg-blue-400 text-black dark:text-black rounded-full text-sm font-medium';
-    } else {
-      // デフォルト（その他）
-      return 'px-4 py-2 bg-blue-900 dark:bg-blue-900 text-black dark:text-black rounded-full text-sm font-medium';
-    }
-  };
   
   return (
     <section className="about-section py-16">
@@ -68,7 +48,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
               skills.map((skill, index) => (
                 <span
                   key={index}
-                  className={getSkillColor(skill)}
+                  className={getSkillColor(skill, 'rounded')}
                 >
                   {skill}
                 </span>

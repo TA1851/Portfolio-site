@@ -3,17 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-export interface Work {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  githubUrl: string;
-  githubUrl2?: string;
-  demoUrl?: string;
-}
+import { Work } from '@/types';
+import { getSkillColor } from '@/utils/skillColors';
 
 interface WorksGridProps {
   works: Work[];
@@ -22,25 +13,15 @@ interface WorksGridProps {
 }
 
 // 画像パスを正規化する関数
-const normalizeImagePath = (imagePath: string): string => {
-  if (!imagePath || typeof imagePath !== 'string') return '';
+const normalizeImagePath = (image: Work['image']): string => {
+  if (!image) return '';
   
-  const trimmed = imagePath.trim();
-  
-  // 相対パスを絶対パスに変換
-  if (trimmed.startsWith('../../public/')) {
-    return trimmed.replace('../../public/', '/');
+  // Sanity CMSの画像URLがある場合
+  if (image.asset?.url) {
+    return image.asset.url;
   }
   
-  if (trimmed.startsWith('../public/')) {
-    return trimmed.replace('../public/', '/');
-  }
-  
-  if (trimmed.startsWith('./public/')) {
-    return trimmed.replace('./public/', '/');
-  }
-  
-  return trimmed;
+  return '';
 };
 
 // URLの有効性をチェックする関数
@@ -65,33 +46,6 @@ const isValidUrl = (url: string): boolean => {
   return false;
 };
 
-// スキルのカテゴリ別色設定
-const getSkillColor = (skill: string) => {
-  const lowerSkill = skill.toLowerCase();
-  
-  // プログラミング言語（小文字で定義）
-  const languages = ['typescript', 'python', 'java', 'javascript'];
-  // フレームワーク・ライブラリ（小文字で定義）
-  const frameworks = ['react', 'fastapi', 'springboot', 'next.js', 'nextjs', 'springwebflux'];
-  // CSS関連（小文字で定義）
-  const styling = ['tailwind css', 'tailwindcss', 'emotion', 'css'];
-  // その他のツール・技術（小文字で定義）
-  const tools = ['sanity cms', 'sanitycms', 'render', 'vercel', 'mui', 'ec2', 'rds'];
-  
-  if (languages.includes(lowerSkill)) {
-    return 'px-2 py-1 bg-green-100 dark:bg-green-500 text-black rounded text-sm';
-  } else if (frameworks.includes(lowerSkill)) {
-    return 'px-2 py-1 bg-yellow-100 dark:bg-yellow-400 text-black rounded text-sm';
-  } else if (styling.includes(lowerSkill)) {
-    return 'px-2 py-1 bg-blue-100 dark:bg-blue-600 text-black rounded text-sm';
-  } else if (tools.includes(lowerSkill)) {
-    return 'px-2 py-1 bg-purple-100 dark:bg-purple-500 text-black rounded text-sm';
-  } else {
-    // デフォルト（その他）
-    return 'px-2 py-1 bg-red-100 dark:bg-red-900 text-black rounded text-sm';
-  }
-};
-
 const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, className = '' }) => {
   return (
     <section className={`works-section py-16 bg-transparent ${className}`}>
@@ -109,7 +63,7 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, classNam
             
             return (
               <div
-                key={work.id}
+                key={work._id}
                 className="work-card overflow-hidden"
               >
                 {hasValidImage ? (
@@ -139,7 +93,7 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, classNam
                   <div className="mb-4">
                     <h4 className="text-sm font-medium mb-2 text-gray-800 dark:text-white">使用技術</h4>
                     <div className="flex flex-wrap gap-2">
-                      {work.technologies.map((tech) => (
+                      {work.technologies && work.technologies.map((tech) => (
                         <span
                           key={tech}
                           className={getSkillColor(tech)}
@@ -150,14 +104,16 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, classNam
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Link
-                      href={work.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors duration-200"
-                    >
-                      GitHub
-                    </Link>
+                    {work.githubUrl && (
+                      <Link
+                        href={work.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors duration-200"
+                      >
+                        GitHub
+                      </Link>
+                    )}
                     {work.githubUrl2 && (
                       <Link
                         href={work.githubUrl2}

@@ -64,7 +64,7 @@ export interface Tag {
 export interface Work {
   _id: string
   title: string
-  slug: {
+  slug?: {
     current: string
   }
   description?: string
@@ -78,7 +78,9 @@ export interface Work {
   technologies?: string[]
   projectUrl?: string
   githubUrl?: string
-  featured: boolean
+  githubUrl2?: string
+  demoUrl?: string
+  featured?: boolean
   order?: number
 }
 
