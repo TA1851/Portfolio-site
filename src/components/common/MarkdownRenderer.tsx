@@ -9,10 +9,11 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeHighlight]}
-      components={{
+    <div className="markdown-content">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeHighlight]}
+        components={{
         // 見出し
         h1: ({ children }) => (
           <h1 className="text-white text-4xl font-bold mb-6 mt-8">{children}</h1>
@@ -57,10 +58,10 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         ),
         
         // コード
-        code: ({ children, className, ...props }: React.HTMLProps<HTMLElement>) => {
-          const isInline = !className?.includes('language-')
-          
-          if (isInline) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        code: (props: any) => {
+          const { children, className, inline } = props
+          if (inline) {
             return (
               <code className="bg-gray-800 text-green-400 px-2 py-1 rounded text-sm font-mono">
                 {children}
@@ -68,13 +69,13 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             )
           }
           return (
-            <code className={className} {...props}>
+            <code className={`${className || ''} text-sm`}>
               {children}
             </code>
           )
         },
         pre: ({ children }) => (
-          <pre className="bg-gray-900 p-4 rounded-lg overflow-x-auto my-4">
+          <pre className="bg-gray-900 border border-gray-700 p-4 rounded-lg overflow-x-auto my-4 text-sm leading-relaxed">
             {children}
           </pre>
         ),
@@ -154,9 +155,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             {children}
           </td>
         ),
-      }}
-    >
-      {content}
-    </ReactMarkdown>
+      }}      >
+        {content}
+      </ReactMarkdown>
+    </div>
   )
 }
