@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useRef, FC, HTMLAttributes, DetailedHTMLProps } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -153,38 +155,18 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         ),
         
         // テーブル
-        table: ({ children }) => (
+        table: ({ node: _, ...props }) => (
           <div className="overflow-x-auto my-4">
-            <table className="w-full border-collapse border border-gray-600">
-              {children}
-            </table>
+            <table {...props} className="w-full border-collapse border border-gray-600" />
           </div>
         ),
-        thead: ({ children }) => (
-          <thead className="bg-gray-800">
-            {children}
-          </thead>
+        thead: ({ node: _, ...props }) => <thead {...props} className="bg-gray-800" />,
+        tbody: ({ node: _, ...props }) => <tbody {...props} className="divide-y divide-gray-700" />,
+        tr: ({ node: _, ...props }) => <tr {...props} className="border-b border-gray-700" />,
+        th: ({ node: _, ...props }) => (
+          <th {...props} className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider" />
         ),
-        tbody: ({ children }) => (
-          <tbody>
-            {children}
-          </tbody>
-        ),
-        tr: ({ children }) => (
-          <tr className="border-b border-gray-600">
-            {children}
-          </tr>
-        ),
-        th: ({ children }) => (
-          <th className="border border-gray-600 px-4 py-2 text-white font-semibold text-left">
-            {children}
-          </th>
-        ),
-        td: ({ children }) => (
-          <td className="border border-gray-600 px-4 py-2 text-white">
-            {children}
-          </td>
-        ),
+        td: ({ node: _, ...props }) => <td {...props} className="px-6 py-4 whitespace-nowrap text-sm text-white" />,
       }}      >
         {content}
       </ReactMarkdown>

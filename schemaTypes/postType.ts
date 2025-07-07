@@ -39,6 +39,7 @@ export const postType = defineType({
             theme: 'github-dark', // シンタックスハイライトのテーマ
           },
         },
+        {type: 'table'},
       ],
     }),
   ],
