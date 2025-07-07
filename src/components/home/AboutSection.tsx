@@ -48,13 +48,13 @@ const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
               skills.map((skill, index) => (
                 <span
                   key={index}
-                  className={getSkillColor(skill, 'rounded')}
+                  className={`${getSkillColor(skill, 'rounded')} !text-white`}
                 >
                   {skill}
                 </span>
               ))
             ) : (
-              <p className="text-gray-500 dark:text-gray-400">スキル情報がありません</p>
+              <p className="text-white">スキル情報がありません</p>
             )}
           </div>
         </div>

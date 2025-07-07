@@ -64,7 +64,7 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, classNam
             return (
               <div
                 key={work._id}
-                className="work-card overflow-hidden"
+                className="work-card bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden"
               >
                 {hasValidImage ? (
                   <Image
