@@ -33,16 +33,17 @@ export const works: Work[] = [
   },
   {
     _id: '3',
-    title: '家計簿アプリを開発中',
-    description: 'SpringBootを使用した家計簿アプリ',
+    title: '家計簿アプリ',
+    description: 'SpringBootを使用した家計簿アプリの構築',
     image: {
       asset: {
-        _ref: 'image-portfolio-site',
-        url: '/images/portfolio-site.jpg'
+        _ref: '',
+        url: ''
       },
       alt: '家計簿アプリのスクリーンショット'
     },
     technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS'],
-    githubUrl: 'https://github.com/TA1851/ai-chatbot',
+    githubUrl: '',
+    demoUrl: ''
   },
 ];
