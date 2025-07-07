@@ -14,6 +14,10 @@ interface PostSummary {
   } | null;
 }
 
+interface PostPageProps {
+  params: Promise<{ slug: string }>;
+}
+
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{
   _id,
   title,
@@ -31,11 +35,7 @@ const urlFor = (source: SanityImageSource) =>
 
 const options = { next: { revalidate: 30 } };
 
-export default async function PostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function PostPage({ params }: PostPageProps) {
   try {
     const resolvedParams = await params;
     
@@ -157,5 +157,22 @@ export default async function PostPage({
         </div>
       </main>
     );
+  }
+}
+
+export async function generateStaticParams() {
+  try {
+    const posts = await client.fetch<{ slug: string }[]>(
+      `*[_type == "post" && defined(slug.current)][0...100] {
+        "slug": slug.current
+      }`
+    )
+    
+    return posts.map((post) => ({
+      slug: post.slug,
+    }))
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
   }
 }
