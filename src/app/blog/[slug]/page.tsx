@@ -3,7 +3,7 @@ import { postQuery } from '@/lib/queries'
 import { Post } from '@/types'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
-import { PortableText } from '@portabletext/react'
+// import { PortableText, PortableTextBlock } from '@portabletext/react'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 
@@ -62,7 +62,9 @@ export default async function PostPage({ params }: PostPageProps) {
             {post.mainImage && (
               <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-8">
                 <Image 
-                  src={`https://cdn.sanity.io/images/hrnqyow5/production/${post.mainImage.asset._ref.replace('image-', '').replace('-png', '.png').replace('-jpg', '.jpg').replace('-jpeg', '.jpeg')}`}
+                  src={`https://cdn.sanity.io/images/hrnqyow5/production/${post.mainImage.asset._ref
+                    .replace('image-', '')
+                    .replace(/-(png|jpg|jpeg|webp|gif)$/, '.$1')}`}
                   alt={post.mainImage.alt || post.title}
                   width={800}
                   height={450}
@@ -73,7 +75,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </header>
           
           <div className="prose prose-lg prose-invert max-w-none text-white">
-            {post.body && <PortableText value={post.body as any} />}
+            {/* {post.body && <PortableText value={post.body as PortableTextBlock[]} />} */}
           </div>
         </article>
       </main>

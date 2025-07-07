@@ -8,10 +8,40 @@ interface WorksSectionProps {
 }
 
 const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
+  // スキルのカテゴリ別色設定
+  const getSkillColor = (skill: string) => {
+    const lowerSkill = skill.toLowerCase();
+    
+    // プログラミング言語（小文字で定義）
+    const languages = ['typescript', 'python', 'java', 'javascript'];
+    // フレームワーク・ライブラリ（小文字で定義）
+    const frameworks = ['react', 'fastapi', 'springboot', 'next.js', 'nextjs', 'springwebflux'];
+    // CSS関連（小文字で定義）
+    const styling = ['tailwind css', 'tailwindcss', 'emotion', 'css'];
+    // その他のツール・技術（小文字で定義）
+    const tools = ['sanity cms', 'sanitycms', 'render', 'vercel', 'mui'];
+
+    // デバッグ用ログ（一時的に追加）
+    console.log('Skill:', skill, 'LowerSkill:', lowerSkill);
+    
+    if (languages.includes(lowerSkill)) {
+      return 'px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-sm';
+    } else if (frameworks.includes(lowerSkill)) {
+      return 'px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded text-sm';
+    } else if (styling.includes(lowerSkill)) {
+      return 'px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm';
+    } else if (tools.includes(lowerSkill)) {
+      return 'px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-sm';
+    } else {
+      // デフォルト（その他）
+      return 'px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded text-sm';
+    }
+  };
+
   return (
     <section className="works-section py-16 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+        <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
           Works
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -42,7 +72,7 @@ const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
                     {work.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm"
+                        className={getSkillColor(tech)}
                       >
                         {tech}
                       </span>
