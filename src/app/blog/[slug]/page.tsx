@@ -7,6 +7,10 @@ import Footer from '@/components/common/Footer'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 
+// キャッシュを無効化して常に最新データを取得
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 interface PostPageProps {
   params: Promise<{
     slug: string
@@ -15,7 +19,10 @@ interface PostPageProps {
 
 async function getPost(slug: string): Promise<Post | null> {
   try {
-    const post = await client.fetch(postQuery, { slug })
+    const post = await client.fetch(postQuery, { slug }, { 
+      cache: 'no-store', // キャッシュを無効化
+      next: { revalidate: 0 } // 常に最新データを取得
+    })
     return post
   } catch (error) {
     console.error('Error fetching post:', error)

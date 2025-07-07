@@ -6,9 +6,16 @@ import Footer from '@/components/common/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
 
+// キャッシュを無効化して常に最新データを取得
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getPosts(): Promise<Post[]> {
   try {
-    const posts = await client.fetch(postsQuery)
+    const posts = await client.fetch(postsQuery, {}, { 
+      cache: 'no-store', // キャッシュを無効化
+      next: { revalidate: 0 } // 常に最新データを取得
+    })
     return posts || []
   } catch (error) {
     console.error('Error fetching posts:', error)
