@@ -1,17 +1,19 @@
 import {defineField, defineType} from 'sanity'
 
-export const categoryType = defineType({
-  name: 'category',
-  title: 'カテゴリ',
+export const tagType = defineType({
+  name: 'tag',
+  title: 'タグ',
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'カテゴリ名',
+      name: 'name',
+      title: 'タグ名',
       type: 'string',
       validation: Rule => [
-        Rule.required().error('カテゴリ名は必須です'),
-        Rule.min(1).max(50).error('カテゴリ名は1文字以上50文字以下で入力してください')
+        Rule.required().error('タグ名は必須です'),
+        Rule.min(1).max(50).error('タグ名は1文字以上50文字以下で入力してください'),
+        Rule.regex(/^[a-zA-Z0-9\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\u3400-\u4DBF\s\-_]+$/)
+          .error('タグ名には英数字、ひらがな、カタカナ、漢字、スペース、ハイフン、アンダースコアのみ使用できます')
       ]
     }),
     defineField({
@@ -19,7 +21,7 @@ export const categoryType = defineType({
       title: 'スラッグ',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'name',
         maxLength: 96,
         slugify: input => input
           .toLowerCase()
@@ -33,11 +35,11 @@ export const categoryType = defineType({
       title: '説明',
       type: 'text',
       rows: 3,
-      description: 'このカテゴリの説明（オプション）'
+      description: 'このタグの説明（オプション）'
     }),
     defineField({
       name: 'color',
-      title: 'カテゴリカラー',
+      title: 'タグカラー',
       type: 'string',
       options: {
         list: [
@@ -55,14 +57,14 @@ export const categoryType = defineType({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'name',
       subtitle: 'description'
     },
     prepare(selection) {
       const { title, subtitle } = selection;
       return {
-        title: title,
-        subtitle: subtitle || 'カテゴリの説明なし'
+        title: `#${title}`,
+        subtitle: subtitle || 'タグの説明なし'
       };
     }
   }

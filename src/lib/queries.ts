@@ -49,7 +49,7 @@ export const postsQuery = groq`
       color
     },
     tags[]-> {
-      title,
+      name,
       slug,
       color
     },
@@ -86,7 +86,7 @@ export const postQuery = groq`
       color
     },
     tags[]-> {
-      title,
+      name,
       slug,
       color
     },
@@ -150,9 +150,9 @@ export const categoriesQuery = groq`
 `
 
 export const tagsQuery = groq`
-  *[_type == "tag"] | order(title asc) {
+  *[_type == "tag"] | order(name asc) {
     _id,
-    title,
+    name,
     slug,
     description,
     color,
@@ -192,7 +192,7 @@ export const relatedPostsQuery = groq`
       color
     },
     tags[]-> {
-      title,
+      name,
       slug,
       color
     },

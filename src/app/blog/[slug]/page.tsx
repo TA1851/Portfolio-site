@@ -3,6 +3,8 @@ import { postQuery } from '@/lib/queries'
 import { Post } from '@/types'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
+import FloatingShareButton from '@/components/common/FloatingShareButton'
+import { TagList } from '@/components/common/TagList'
 import { PortableText } from '@portabletext/react'
 import MarkdownRenderer from '@/components/common/MarkdownRenderer'
 import { notFound } from 'next/navigation'
@@ -68,6 +70,17 @@ export default async function PostPage({ params }: PostPageProps) {
                 </div>
               )}
             </div>
+
+            {/* タグ表示 */}
+            {post.tags && post.tags.length > 0 && (
+              <div className="mb-6">
+                <TagList
+                  tags={post.tags}
+                  variant="default"
+                  size="sm"
+                />
+              </div>
+            )}
             
             {(post.image || post.mainImage) && (
               <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-8">
@@ -78,18 +91,23 @@ export default async function PostPage({ params }: PostPageProps) {
                   
                   try {
                     const imageUrl = urlFor(imageData)
-                      .width(800)
-                      .height(450)
+                      .width(1200)
+                      .height(675)
                       .fit('crop')
+                      .crop('center')
+                      .quality(90)
                       .url();
                     
                     return (
                       <Image 
                         src={imageUrl}
                         alt={imageData?.alt || post.title}
-                        width={800}
-                        height={450}
+                        width={1200}
+                        height={675}
                         className="w-full h-full object-cover"
+                        priority
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                       />
                     );
                   } catch (error) {
@@ -226,6 +244,16 @@ export default async function PostPage({ params }: PostPageProps) {
         </article>
       </main>
       <Footer />
+      
+      {/* フローティング共有ボタン */}
+      <FloatingShareButton 
+        post={{
+          title: post.title,
+          excerpt: post.excerpt,
+          slug: post.slug,
+          url: `${process.env.NEXT_PUBLIC_SITE_URL || ''}/blog/${post.slug.current}`
+        }}
+      />
     </div>
   )
 }

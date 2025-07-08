@@ -71,22 +71,18 @@ export interface Category {
     current: string
   }
   description?: string
-  color?: {
-    hex: string
-  }
+  color?: string
   postCount?: number
 }
 
 export interface Tag {
   _id: string
-  title: string
+  name: string
   slug: {
     current: string
   }
   description?: string
-  color?: {
-    hex: string
-  }
+  color?: string
   postCount?: number
 }
 

@@ -155,18 +155,18 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         ),
         
         // テーブル
-        table: ({ node: _, ...props }) => (
+        table: ({ ...props }) => (
           <div className="overflow-x-auto my-4">
             <table {...props} className="w-full border-collapse border border-gray-600" />
           </div>
         ),
-        thead: ({ node: _, ...props }) => <thead {...props} className="bg-gray-800" />,
-        tbody: ({ node: _, ...props }) => <tbody {...props} className="divide-y divide-gray-700" />,
-        tr: ({ node: _, ...props }) => <tr {...props} className="border-b border-gray-700" />,
-        th: ({ node: _, ...props }) => (
+        thead: ({ ...props }) => <thead {...props} className="bg-gray-800" />,
+        tbody: ({ ...props }) => <tbody {...props} className="divide-y divide-gray-700" />,
+        tr: ({ ...props }) => <tr {...props} className="border-b border-gray-700" />,
+        th: ({ ...props }) => (
           <th {...props} className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider" />
         ),
-        td: ({ node: _, ...props }) => <td {...props} className="px-6 py-4 whitespace-nowrap text-sm text-white" />,
+        td: ({ ...props }) => <td {...props} className="px-6 py-4 whitespace-nowrap text-sm text-white" />,
       }}      >
         {content}
       </ReactMarkdown>
