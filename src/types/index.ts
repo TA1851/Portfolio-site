@@ -108,7 +108,7 @@ export interface Work {
   projectUrl?: string
   githubUrl?: string
   githubUrl2?: string
-  demoUrl?: string
+  MyUrl?: string
   featured?: boolean
   order?: number
 }

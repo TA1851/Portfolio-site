@@ -29,11 +29,11 @@ export const works: Work[] = [
     technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Python', 'FastAPI', 'MUI', 'Render', 'Vercel'],
     githubUrl: 'https://github.com/TA1851/blog-api-main',
     githubUrl2: 'https://github.com/TA1851/nextjs-app',
-    demoUrl: 'https://nextjs-app-yvfr.vercel.app/'
+    MyUrl: 'https://nextjs-app-yvfr.vercel.app/'
   },
   {
     _id: '3',
-    title: '家計簿アプリ',
+    title: '家計簿アプリ（開発中）',
     description: 'SpringBootを使用した家計簿アプリの構築',
     image: {
       asset: {
@@ -44,6 +44,6 @@ export const works: Work[] = [
     },
     technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS'],
     githubUrl: '',
-    demoUrl: ''
+    MyUrl: ''
   },
 ];
