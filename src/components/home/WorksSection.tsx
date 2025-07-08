@@ -38,9 +38,9 @@ const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
                   </p>
                   {work.technologies && work.technologies.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {work.technologies.map((tech, index) => (
+                      {work.technologies.map((tech) => (
                         <span
-                          key={index}
+                          key={tech}
                           className={getSkillColor(tech)}
                         >
                           {tech}
@@ -61,11 +61,12 @@ const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
                     )}
                     {(work.projectUrl) && (
                       <Link
-                        href={ work.projectUrl }
+                        href={work.projectUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors duration-200"
                       >
+                        Blog
                       </Link>
                     )}
                   </div>
@@ -74,7 +75,7 @@ const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
             );
 
             return (
-              <div key={work._id} className="bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+              <div key={work._id} className="hover:shadow-lg transition-shadow duration-300">
                 {CardContent}
               </div>
             );

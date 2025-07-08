@@ -10,15 +10,15 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Personal Blog',
-    template: '%s | Personal Blog'
+    default: 'My Portfolio',
+    template: '%s | My Portfolio'
   },
-  description: 'Personal website and blog',
+  description: 'My personal website and blog',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
     url: process.env.NEXT_PUBLIC_SITE_URL,
-    siteName: 'Personal Blog',
+    siteName: 'My Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
