@@ -59,14 +59,13 @@ const WorksSection: React.FC<WorksSectionProps> = ({ works }) => {
                         GitHub
                       </Link>
                     )}
-                    {(work.MyUrl || work.projectUrl) && (
+                    {(work.projectUrl) && (
                       <Link
-                        href={work.MyUrl || work.projectUrl || ''}
+                        href={ work.projectUrl }
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors duration-200"
                       >
-                        Demo
                       </Link>
                     )}
                   </div>

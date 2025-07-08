@@ -124,14 +124,14 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works, showTitle = true, classNam
                         GitHub Nextjs
                       </Link>
                     )}
-                    {work.demoUrl && (
+                    {work.projectUrl && (
                       <Link
-                        href={work.demoUrl}
+                        href={work.projectUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors duration-200"
                       >
-                        Demo
+                        Blog
                       </Link>
                     )}
                   </div>

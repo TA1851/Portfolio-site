@@ -29,7 +29,7 @@ export const works: Work[] = [
     technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Python', 'FastAPI', 'MUI', 'Render', 'Vercel'],
     githubUrl: 'https://github.com/TA1851/blog-api-main',
     githubUrl2: 'https://github.com/TA1851/nextjs-app',
-    MyUrl: 'https://nextjs-app-yvfr.vercel.app/'
+    projectUrl: 'https://nextjs-app-yvfr.vercel.app/'
   },
   {
     _id: '3',
@@ -44,6 +44,6 @@ export const works: Work[] = [
     },
     technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS'],
     githubUrl: '',
-    MyUrl: ''
+    projectUrl: ''
   },
 ];
