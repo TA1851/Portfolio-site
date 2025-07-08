@@ -116,12 +116,26 @@ export function BlogContent({ initialPosts, initialTags }: BlogContentProps) {
           {posts.map((post) => (
             <Link key={post._id} href={`/blog/${post.slug.current}`}>
               <article className="work-card overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
-                {(post.image || post.mainImage) && (
-                  <div className="aspect-video bg-gray-200 dark:bg-gray-700 flex-shrink-0">
-                    {(() => {
+                {/* 画像エリア - 常に表示 */}
+                <div className="aspect-video bg-gray-200 dark:bg-gray-700 flex-shrink-0">
+                  {(post.image || post.mainImage) ? (
+                    (() => {
                       const imageData = post.image || post.mainImage;
                       
-                      if (!imageData?.asset) return null;
+                      if (!imageData?.asset) {
+                        return (
+                          <div className="w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                            <div className="text-center">
+                              <div className="w-12 h-12 mx-auto mb-2 flex items-center justify-center bg-gray-300 dark:bg-gray-600 rounded-lg">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                                </svg>
+                              </div>
+                              <span className="text-sm">画像なし</span>
+                            </div>
+                          </div>
+                        );
+                      }
                       
                       try {
                         const imageUrl = urlFor(imageData)
@@ -145,11 +159,33 @@ export function BlogContent({ initialPosts, initialTags }: BlogContentProps) {
                         );
                       } catch (error) {
                         console.error('Error building image URL:', error);
-                        return null;
+                        return (
+                          <div className="w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                            <div className="text-center">
+                              <div className="w-12 h-12 mx-auto mb-2 flex items-center justify-center bg-gray-300 dark:bg-gray-600 rounded-lg">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                                </svg>
+                              </div>
+                              <span className="text-sm">画像なし</span>
+                            </div>
+                          </div>
+                        );
                       }
-                    })()}
-                  </div>
-                )}
+                    })()
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                      <div className="text-center">
+                        <div className="w-12 h-12 mx-auto mb-2 flex items-center justify-center bg-gray-300 dark:bg-gray-600 rounded-lg">
+                          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <span className="text-sm">画像なし</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
                 
                 <div className="p-6 flex-grow flex flex-col">
                   <h2 className="text-xl font-semibold text-white mb-2 line-clamp-2">
