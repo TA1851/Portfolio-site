@@ -264,3 +264,7 @@ http://localhost:3000
   title="記事タイトル" 
 />
 ```
+
+```
+npx sanity start
+```
