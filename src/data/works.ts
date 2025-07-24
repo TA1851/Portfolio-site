@@ -34,15 +34,15 @@ export const works: Work[] = [
   {
     _id: '3',
     title: '家計簿アプリ（開発中）',
-    description: 'SpringBootを使用した家計簿アプリの構築',
+    description: 'SpringBootを使用した家計簿アプリの構築。認証はAWSのCognitoを使用。データベースはRDSを使用。',
     image: {
       asset: {
         _ref: '',
-        url: ''
+        url: '/images/kakeibo.png'
       },
       alt: '家計簿アプリのスクリーンショット'
     },
-    technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS'],
+    technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS', 'Cognite'],
     githubUrl: '',
     projectUrl: ''
   },
