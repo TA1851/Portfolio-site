@@ -268,3 +268,9 @@ http://localhost:3000
 ```
 npx sanity start
 ```
+
+react&next version
+```
+npm list --version
+npx next --version
+```
