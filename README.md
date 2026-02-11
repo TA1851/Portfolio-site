@@ -274,3 +274,7 @@ react&next version
 npm list --version
 npx next --version
 ```
+
+# 脆弱性対応
+react:19.1.2
+next:15.3.6
