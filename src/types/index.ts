@@ -125,6 +125,13 @@ export interface Hero {
   ctaUrl?: string
 }
 
+export interface TimelineItem {
+  year: string;
+  title: string;
+  company?: string;
+  description: string;
+}
+
 export interface About {
   _id: string
   _type: 'about'
@@ -138,6 +145,7 @@ export interface About {
     alt?: string
   }
   skills?: string[]
+  timeline?: TimelineItem[]
   resume?: {
     asset: {
       _ref: string

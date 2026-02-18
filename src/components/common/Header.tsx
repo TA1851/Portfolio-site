@@ -1,12 +1,31 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import ThemeToggle from './ThemeToggle'
+import gsap from 'gsap'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const maskRef = useRef<HTMLSpanElement>(null)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const { offsetX, offsetY } = e.nativeEvent
+    gsap.to(maskRef.current, {
+      clipPath: `circle(30px at ${offsetX}px ${offsetY}px)`,
+      duration: 0.3,
+      ease: "power2.out",
+    })
+  }
+
+  const handleMouseLeave = () => {
+    gsap.to(maskRef.current, {
+      clipPath: `circle(0px at 50% 50%)`,
+      duration: 0.3,
+      ease: "power2.out",
+    })
+  }
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -20,8 +39,20 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
-              Tatuhiko&apos;s Portfolio
+            <Link 
+              href="/" 
+              className="relative text-2xl font-bold text-gray-900 dark:text-white group"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <span>Tatuhiko&apos;s Portfolio</span>
+              <span 
+                ref={maskRef}
+                className="absolute top-0 left-0 bg-gradient-to-r from-gray-400 via-emerald-500 via-green-500 via-emerald-500 to-gray-400 bg-clip-text text-transparent pointer-events-none"
+                style={{ clipPath: 'circle(0px at 0 0)' }}
+              >
+                Tatuhiko&apos;s Portfolio
+              </span>
             </Link>
           </div>
           <nav className="hidden md:flex space-x-10">

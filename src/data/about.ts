@@ -21,5 +21,26 @@ export const aboutData: About = {
       ]
     },
   ],
-  skills: ['TypeScript', 'Python', 'Java', 'React', 'FastAPI', 'SpringBoot', 'Tailwind CSS', 'Emotion']
+  skills: ['TypeScript', 'Python', 'Java', 'React', 'FastAPI', 'SpringBoot', 'Tailwind CSS', 'Emotion'],
+  timeline: [
+    {
+      year: '以前',
+      title: '半導体製造メーカー',
+      company: 'メーカー',
+      description: 'Wafer測定工程で半導体製造装置エンジニアとして勤務し、エラー解析や装置ログの分析などを、ExcelVBAを使って開発を行っていました。'
+    },
+    {
+      year: 'その後',
+      title: '技術派遣会社',
+      company: '技術派遣',
+      description: '地元札幌にUターン後は、技術派遣会社に転職し、PythonやExcelVBAを使った開発に携わりながら、個人開発で色々な技術を学び、自己学習を続けてきました。'
+    },
+    {
+      year: '現在',
+      title: '社内SE',
+      company: '運送、建設事業',
+      description: '現在は、社内SEとして、C#、Access、ExcelVBAを使って社内システムの保守や開発を行っています。' +
+      'また、SIGNATEというサービスを利用して、データ分析や機械学習の学習コースを受講したので、今後はコンペティションに参加していく予定です。'
+    }
+  ]
 };

@@ -27,13 +27,13 @@ export const works: Work[] = [
       alt: 'ブログサイトのスクリーンショット'
     },
     technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Python', 'FastAPI', 'MUI', 'Render', 'Vercel'],
-    githubUrl: 'https://github.com/TA1851/blog-api-main',
+    githubUrl: 'https://github.com/TA1851/blog_api',
     githubUrl2: 'https://github.com/TA1851/nextjs-app',
     projectUrl: 'https://nextjs-app-yvfr.vercel.app/'
   },
   {
     _id: '3',
-    title: '家計簿アプリ（開発中）',
+    title: '家計簿アプリ',
     description: 'SpringBootを使用した家計簿アプリの構築。認証はAWSのCognitoを使用。データベースはRDSを使用。',
     image: {
       asset: {
@@ -42,7 +42,7 @@ export const works: Work[] = [
       },
       alt: '家計簿アプリのスクリーンショット'
     },
-    technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS', 'Cognite'],
+    technologies: ['Java', 'SpringWebFlux', 'TypeScript','Next.js', 'Emotion', 'MUI', 'EC2', 'RDS', 'Cognito'],
     githubUrl: '',
     projectUrl: ''
   },
