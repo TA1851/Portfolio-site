@@ -29,7 +29,6 @@ export const works: Work[] = [
     technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Python', 'FastAPI', 'MUI', 'Render', 'Vercel', 'PostgreSQL'],
     githubUrl: 'https://github.com/TA1851/blog_api',
     githubUrl2: 'https://github.com/TA1851/nextjs-app',
-    projectUrl: 'https://nextjs-app-yvfr.vercel.app/'
   },
   {
     _id: '3',
