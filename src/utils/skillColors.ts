@@ -1,11 +1,13 @@
 // スキルのカテゴリ別色設定ユーティリティ
 
 export const SKILL_CATEGORIES = {
-  languages: ['typescript', 'python', 'java', 'javascript'],
-  frameworks: ['react', 'springboot', 'spring boot', 'next.js', 'nextjs', 'springwebflux', 'fastapi'],
+  languages: ['typescript', 'python', 'java', 'javascript', 'c#', 'htmx'],
+  frameworks: ['react', 'springboot', 'spring boot',
+              'next.js', 'nextjs', 'springwebflux', 'fastapi', 'flask', 'wpf'],
   styling: ['tailwind css', 'emotion'],
   tools: ['sanity cms', 'render', 'vercel', 'mui', 'ec2', 'rds', 'git', 'github', 'docker'],
-  backend: ['fastapi']
+  backend: ['fastapi', 'flask'],
+  databases: ['sqlite', 'rds', 'mysql', 'postgresql']
 };
 
 /**
