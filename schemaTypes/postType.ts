@@ -64,14 +64,6 @@ export const postType = defineType({
       type: 'array',
       of: [
         {type: 'block'},
-        {
-          type: 'code',
-          title: 'Code Block',
-          options: {
-            language: 'typescript', // デフォルトの言語
-            theme: 'github-dark', // シンタックスハイライトのテーマ
-          },
-        },
         {type: 'table'},
       ],
     }),

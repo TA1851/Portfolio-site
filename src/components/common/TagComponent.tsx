@@ -90,11 +90,15 @@ export function TagComponent({
 
   if (onClick) {
     return (
-      <button
-        onClick={onClick}
-        className={`${baseClasses} cursor-pointer hover:scale-105`}
-        type="button"
-        aria-label={`タグ「${tag.name}」でフィルタリング`}
+      <button onClick={(e) => {
+        e.stopPropagation()  // 親のLinkへの伝播を止める
+        e.preventDefault()   // 親のリンク遷移をキャンセル
+        onClick()
+        }
+      }
+      className={`${baseClasses} cursor-pointer hover:scale-105`}
+      type="button"
+      aria-label={`タグ「${tag.name}」でフィルタリング`}
       >
         {content}
       </button>

@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { CompactTagFilter } from '@/components/common/CompactTagFilter'
 import { TagList } from '@/components/common/TagList'
+import { useRouter } from 'next/navigation'
 
 interface BlogContentProps {
   initialPosts: Post[]
@@ -14,6 +15,7 @@ interface BlogContentProps {
 }
 
 export function BlogContent({ initialPosts, initialTags }: BlogContentProps) {
+  const router = useRouter()
   const [posts, setPosts] = useState<Post[]>(initialPosts)
   const [allPosts] = useState<Post[]>(initialPosts)
   const [tags] = useState<Tag[]>(initialTags)
@@ -206,6 +208,7 @@ export function BlogContent({ initialPosts, initialTags }: BlogContentProps) {
                         variant="subtle"
                         size="sm"
                         maxTags={3}
+                        onTagClick={(tag) => router.push(`/blog/tag/${tag.slug.current}`)}
                       />
                     </div>
                   )}

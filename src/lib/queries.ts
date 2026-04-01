@@ -49,6 +49,7 @@ export const postsQuery = groq`
       color
     },
     tags[]-> {
+      _id,
       name,
       slug,
       color
@@ -86,6 +87,7 @@ export const postQuery = groq`
       color
     },
     tags[]-> {
+      _id,
       name,
       slug,
       color
@@ -192,6 +194,7 @@ export const relatedPostsQuery = groq`
       color
     },
     tags[]-> {
+      _id,
       name,
       slug,
       color

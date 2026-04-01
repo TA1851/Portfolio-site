@@ -33,7 +33,7 @@ export function TagList({
     <div className={`flex flex-wrap gap-2 ${className}`}>
       {displayTags.map((tag) => (
         <TagComponent
-          key={tag._id}
+          key={tag._id ?? tag.slug?.current ?? tag.name}
           tag={tag}
           variant={variant}
           size={size}
